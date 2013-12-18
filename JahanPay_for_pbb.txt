@@ -1,0 +1,45 @@
+Edit (includes/pbboardCodeparse.class.php)
+
+1. Search for 
+ //do not Modify this File-ONly Advanced Users-Special Thanks Pedram Asbaghi Pour @ PersianSKyteam.com
+
+and add this code below it:
+
+$search_array['[buy]'] = '#\[buy\](.*)\-(.*)\-(.*)\-(.*)\[/buy\]#esiU';
+$replace_array['[buy]'] = "\$this->_JahanPay('\\1','\\2','\\3','\\4')";
+
+
+2. Search for
+
+//end_function
+
+and add above it this code (between lines):
+-------------------------------------------------------------------
+function _JahanPay($a,$b,$c,$d)
+{
+global $PowerBB;
+$info = trim($info);
+if (!$a || !$b || !$c || !$d)
+{
+return '';
+}
+else{
+$link = "apfs.php?product_name={$a}&product_id={$b}&amount={$c}&account={$d}";
+return "<a href=\"javascript:void(0)\" onClick=\"apfs=window.open('{$link}','apfs','width=620,height=400');apfs.focus();\"><img src=\"images/p.png\" alt=\"JahanPay\"></a>";       
+}
+}
+-------------------------------------------------------------------
+
+
+3 - Upload the files to your forum.
+
+4 - Upload the Images folder to your forum.
+
+5 - Upoad the file apfs.php to your forum.
+
+***
+BBCode in subject
+
+[buy]product_name-product_id-amount-account[/buy]
+[buy]book-123-100-8888[/buy]
+
